@@ -19,6 +19,28 @@ show_variables() {
 }
 
 
+# Set preferable system options
+set_options() {
+  echo "Set to show all hidden files..."
+  defaults write com.apple.finder AppleShowAllFiles true
+
+  echo "Set to show full path in Finder title..."
+  defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+  echo "Set to unhide user Library folder..."
+  chflags nohidden ~/Library
+
+  echo "Set to show path bar in Finder..."
+  defaults write com.apple.finder ShowPathbar -bool true
+
+  echo "Set to show status bar in Finder..."
+  defaults write com.apple.finder ShowStatusBar -bool true
+
+  echo "Set to disable screen saver and require password after sleep..."
+  defaults write com.apple.screensaver idleTime 0
+  defaults write com.apple.screensaver askForPassword 5 # after 5 sec
+}
+
 # Generate SSH Key
 generate_ssh_key() {
   if [[ -f "$SSH_KEY_PATH" ]]; then
